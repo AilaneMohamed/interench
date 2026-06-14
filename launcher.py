@@ -5,7 +5,9 @@ import threading
 import time
 import webbrowser
 import uvicorn
-
+import importlib
+import sys
+from pathlib import Path
 
 HOST = "127.0.0.1"
 PORT = 8000
@@ -27,8 +29,21 @@ def open_browser_when_ready():
         webbrowser.open(f"http://{HOST}:{PORT}")
 
 
+def prepare_import_path():
+    if getattr(sys, "frozen", False):
+        base_dir = Path(getattr(sys, "_MEIPASS", Path(sys.executable).resolve().parent))
+    else:
+        base_dir = Path(__file__).resolve().parent
+
+    if str(base_dir) not in sys.path:
+        sys.path.insert(0, str(base_dir))
+
+
 def main():
-    from app.main import app as fastapi_app
+    prepare_import_path()
+
+    module = importlib.import_module("app.main")
+    fastapi_app = module.app
 
     t = threading.Thread(target=open_browser_when_ready, daemon=True)
     t.start()
@@ -45,3 +60,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+``

@@ -35,14 +35,17 @@ def prepare_import_path():
     else:
         base_dir = Path(__file__).resolve().parent
 
-    if str(base_dir) not in sys.path:
-        sys.path.insert(0, str(base_dir))
+    app_dir = base_dir / "app"
+
+    for path in [base_dir, app_dir]:
+        if str(path) not in sys.path:
+            sys.path.insert(0, str(path))
 
 
 def main():
     prepare_import_path()
 
-    module = importlib.import_module("app.main")
+    module = importlib.import_module("main")
     fastapi_app = module.app
 
     t = threading.Thread(target=open_browser_when_ready, daemon=True)

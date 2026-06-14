@@ -1,13 +1,19 @@
 # -*- mode: python ; coding: utf-8 -*-
 from pathlib import Path
-from PyInstaller.utils.hooks import collect_all
 
 project_root = Path.cwd()
 
-datas, binaries, hiddenimports = collect_all("app")
+hiddenimports = [
+    "main",
+    "database",
+    "models",
+    "schemas",
+    "services",
+    "services.export_service",
+    "services.interencheres_public",
+]
 
-# On ajoute explicitement le dossier static
-datas += [
+datas = [
     (str(project_root / "app" / "static"), "app/static"),
 ]
 
@@ -15,8 +21,8 @@ block_cipher = None
 
 a = Analysis(
     ["launcher.py"],
-    pathex=[str(project_root)],
-    binaries=binaries,
+    pathex=[str(project_root), str(project_root / "app")],
+    binaries=[],
     datas=datas,
     hiddenimports=hiddenimports,
     hookspath=[],

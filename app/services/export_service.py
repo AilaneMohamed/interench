@@ -4,7 +4,7 @@ import csv
 from io import BytesIO, StringIO
 from sqlalchemy.orm import Session
 from openpyxl import Workbook
-from ..models import Sale, Lot
+from models import Sale, Lot
 
 HEADERS = [
     "sale_id",

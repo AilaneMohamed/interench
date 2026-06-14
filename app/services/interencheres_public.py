@@ -10,7 +10,7 @@ import httpx
 from bs4 import BeautifulSoup
 from sqlalchemy.orm import Session
 
-from ..models import Sale, Lot
+from models import Sale, Lot
 
 BASE_URL = "https://www.interencheres.com"
 CALENDAR_URL = f"{BASE_URL}/calendrier/"

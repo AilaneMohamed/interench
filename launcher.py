@@ -6,7 +6,6 @@ import time
 import webbrowser
 import uvicorn
 
-from app.main import app as fastapi_app
 
 HOST = "127.0.0.1"
 PORT = 8000
@@ -29,6 +28,8 @@ def open_browser_when_ready():
 
 
 def main():
+    from app.main import app as fastapi_app
+
     t = threading.Thread(target=open_browser_when_ready, daemon=True)
     t.start()
 

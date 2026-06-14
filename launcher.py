@@ -63,3 +63,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+    
+BUILD_TAG = "BUILD_V3"
+print(BUILD_TAG)
+

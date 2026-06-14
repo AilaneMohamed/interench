@@ -5,12 +5,14 @@ project_root = Path.cwd()
 
 hiddenimports = [
     "main",
-    "database",
-    "models",
-    "schemas",
-    "services",
-    "services.export_service",
-    "services.interencheres_public",
+    "app",
+    "app.main",
+    "app.database",
+    "app.models",
+    "app.schemas",
+    "app.services",
+    "app.services.export_service",
+    "app.services.interencheres_public",
 ]
 
 datas = [
@@ -21,7 +23,7 @@ block_cipher = None
 
 a = Analysis(
     ["launcher.py"],
-    pathex=[str(project_root), str(project_root / "app")],
+    pathex=[str(project_root)],
     binaries=[],
     datas=datas,
     hiddenimports=hiddenimports,

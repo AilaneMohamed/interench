@@ -3,16 +3,26 @@ from PyInstaller.utils.hooks import collect_submodules
 from pathlib import Path
 
 project_root = Path.cwd()
-hiddenimports = collect_submodules('app')
+
+hiddenimports = collect_submodules("app") + [
+    "app",
+    "app.main",
+    "app.database",
+    "app.models",
+    "app.schemas",
+    "app.services",
+    "app.services.export_service",
+    "app.services.interencheres_public",
+]
 
 datas = [
-    (str(project_root / 'app' / 'static'), 'app/static'),
+    (str(project_root / "app" / "static"), "app/static"),
 ]
 
 block_cipher = None
 
 a = Analysis(
-    ['launcher.py'],
+    ["launcher.py"],
     pathex=[str(project_root)],
     binaries=[],
     datas=datas,
@@ -26,7 +36,13 @@ a = Analysis(
     cipher=block_cipher,
     noarchive=False,
 )
-pyz = PYZ(a.pure, a.zipped_data, cipher=block_cipher)
+
+pyz = PYZ(
+    a.pure,
+    a.zipped_data,
+    cipher=block_cipher,
+)
+
 exe = EXE(
     pyz,
     a.scripts,
@@ -34,7 +50,7 @@ exe = EXE(
     a.zipfiles,
     a.datas,
     [],
-    name='InterencheresPublicTracker',
+    name="InterencheresPublicTracker",
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,

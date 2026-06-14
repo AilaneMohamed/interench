@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Interencheres Public Tracker</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <header class="hero">
+    <div>
+      <p class="eyebrow">Application Windows exécutable</p>
+      <h1>Interencheres Public Tracker</h1>
+      <p class="subtitle">Sélectionne une maison de vente, charge ses ventes publiques, les titres et photos des lots quand elles sont publiées, et exporte en CSV / Excel.</p>
+    </div>
+  </header>
+  <main class="container">
+    <section class="panel controls">
+      <div class="field field-wide">
+        <label for="house_name">Maison de vente</label>
+        <input id="house_name" placeholder="Ex. Osenat, ADN Enchères, COUTON JAMAULT HIRN" />
+      </div>
+      <div class="actions">
+        <button id="refreshBtn">Actualiser</button>
+        <button id="loadBtn" class="secondary">Charger</button>
+        <a id="csvLink" class="download" href="/api/export/csv" target="_blank">Exporter CSV</a>
+        <a id="xlsxLink" class="download" href="/api/export/xlsx" target="_blank">Exporter Excel</a>
+      </div>
+      <div id="statusBox" class="status-box">Prêt.</div>
+    </section>
+
+    <section class="grid two-col">
+      <div class="panel">
+        <h2>Ventes</h2>
+        <div id="salesList" class="list"></div>
+      </div>
+      <div class="panel">
+        <h2>Détail & lots</h2>
+        <div id="saleDetail" class="detail empty">Aucune vente sélectionnée.</div>
+        <div id="lotsList" class="lots"></div>
+      </div>
+    </section>
+  </main>
+  <script src="/static/app.js"></script>
+</body>
+</html>
